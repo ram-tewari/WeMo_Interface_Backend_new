@@ -3,6 +3,7 @@ import os
 import subprocess
 import time
 import logging
+import threading
 from dotenv import load_dotenv
 
 # Load environment variables
@@ -22,52 +23,84 @@ class SSHClient:
         self.WEMOPORT = os.getenv("WEMOPORT")
         self.active_sessions = {}  # Track active sessions
 
+    def _read_output(self, process, bot_id):
+        """Background thread to read process output for debugging"""
+        try:
+            while process.poll() is None:
+                output = process.stdout.readline()
+                if output:
+                    ssh_logger.debug(f"Bot {bot_id} output: {output.strip()}")
+        except:
+            pass
+
     def start_session(self, bot_id: int) -> str:
         ssh_logger.info(f"Starting session for bot {bot_id}")
         try:
             if bot_id in self.active_sessions:
                 return "Session already active"
 
-            # Build the SSH command
-            ssh_command = f"ssh.hive@{self.WEMOIP}{bot_id}:{self.WEMOPORT}"
+            # Build the correct SSH command with proper format
+            # ssh username@hostname -p port
+            ssh_command = ["ssh", f"hive@{self.WEMOIP}{bot_id}", "-p", str(self.WEMOPORT)]
+            ssh_logger.info(f"Executing SSH command: {' '.join(ssh_command)}")
 
-            # Start the process
+            # Start the SSH process
             process = subprocess.Popen(
                 ssh_command,
-                shell=True,
                 stdin=subprocess.PIPE,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
-                text=True
+                text=True,
+                bufsize=0  # Unbuffered
             )
 
             # Store the process
             self.active_sessions[bot_id] = process
 
+            # Start background thread to read output
+            output_thread = threading.Thread(target=self._read_output, args=(process, bot_id))
+            output_thread.daemon = True
+            output_thread.start()
+
+            # Give SSH time to establish connection and show password prompt
+            time.sleep(2)
+
             # Step 2: Enter password
+            ssh_logger.info("Sending password...")
             process.stdin.write("robohive\n")
             process.stdin.flush()
-            time.sleep(1)  # Allow time for response
+            time.sleep(3)  # Allow time for authentication and shell prompt
 
             # Step 3: Start teleop console
+            ssh_logger.info("Starting robohive_keyboard_teleop_console...")
             process.stdin.write("robohive_keyboard_teleop_console\n")
             process.stdin.flush()
-            time.sleep(1)
+            time.sleep(3)  # Allow time for console to start
 
             # Step 4: Press ENTER to select robot
+            ssh_logger.info("Pressing ENTER to select robot...")
             process.stdin.write("\n")
             process.stdin.flush()
-            time.sleep(1)
+            time.sleep(2)
 
             # Step 5: Grab the bot
+            ssh_logger.info("Sending 'g' to grab the bot...")
             process.stdin.write("g\n")
             process.stdin.flush()
             time.sleep(1)
 
-            ssh_logger.info(f"Session started for bot {bot_id}")
+            ssh_logger.info(f"Session started successfully for bot {bot_id}")
             return "Session started successfully"
+            
         except Exception as e:
             ssh_logger.error(f"Failed to start session for bot {bot_id}: {str(e)}")
+            # Clean up if process was created
+            if bot_id in self.active_sessions:
+                try:
+                    self.active_sessions[bot_id].terminate()
+                    del self.active_sessions[bot_id]
+                except:
+                    pass
             raise SSHClientError(f"Failed to start session: {str(e)}")
 
     def end_session(self, bot_id: int) -> str:
@@ -79,21 +112,31 @@ class SSHClient:
             process = self.active_sessions[bot_id]
 
             # Ungrab the bot
+            ssh_logger.info("Ungrapping the bot...")
             process.stdin.write("g\n")
             process.stdin.flush()
             time.sleep(0.5)
 
-            # Exit the session
+            # Exit the teleop console (Ctrl+C)
+            ssh_logger.info("Exiting teleop console...")
+            process.stdin.write("\x03")  # Send Ctrl+C
+            process.stdin.flush()
+            time.sleep(1)
+            
+            # Exit the SSH session
+            ssh_logger.info("Exiting SSH session...")
             process.stdin.write("exit\n")
             process.stdin.flush()
-            time.sleep(0.5)
+            time.sleep(1)
 
-            # Terminate the process
-            process.terminate()
-            try:
-                process.wait(timeout=2.0)
-            except subprocess.TimeoutExpired:
-                process.kill()
+            # Terminate the process if still running
+            if process.poll() is None:
+                process.terminate()
+                try:
+                    process.wait(timeout=3.0)
+                except subprocess.TimeoutExpired:
+                    ssh_logger.warning(f"Force killing SSH process for bot {bot_id}")
+                    process.kill()
 
             del self.active_sessions[bot_id]
             ssh_logger.info(f"Session ended for bot {bot_id}")
@@ -108,6 +151,11 @@ class SSHClient:
                 raise SSHClientError("No active session for this bot")
 
             process = self.active_sessions[bot_id]
+            
+            # Check if process is still alive
+            if process.poll() is not None:
+                raise SSHClientError("SSH session has terminated")
+                
             process.stdin.write(command + "\n")
             process.stdin.flush()
             time.sleep(0.1)  # Short delay for command processing
