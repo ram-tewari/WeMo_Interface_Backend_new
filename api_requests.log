@@ -1,0 +1,55 @@
+2025-07-25 13:19:33,332 - API - INFO - API Request: {"method": "GET", "path": "/", "status_code": 404, "process_time": "0.63ms", "client": "127.0.0.1"}
+2025-07-25 13:19:33,399 - API - INFO - API Request: {"method": "GET", "path": "/favicon.ico", "status_code": 404, "process_time": "0.37ms", "client": "127.0.0.1"}
+2025-07-25 13:19:43,765 - API - INFO - API Request: {"method": "GET", "path": "/", "status_code": 404, "process_time": "0.33ms", "client": "127.0.0.1"}
+2025-07-25 13:19:44,052 - API - INFO - API Request: {"method": "GET", "path": "/favicon.ico", "status_code": 404, "process_time": "0.41ms", "client": "127.0.0.1"}
+2025-07-25 13:19:59,702 - API - INFO - API Request: {"method": "GET", "path": "/", "status_code": 404, "process_time": "0.45ms", "client": "127.0.0.1"}
+2025-07-25 13:20:00,004 - API - INFO - API Request: {"method": "GET", "path": "/favicon.ico", "status_code": 404, "process_time": "0.30ms", "client": "127.0.0.1"}
+2025-07-25 13:20:04,848 - API - INFO - API Request: {"method": "GET", "path": "/start-session", "status_code": 404, "process_time": "0.49ms", "client": "127.0.0.1"}
+2025-07-25 13:52:39,966 - API - INFO - API Request: {"method": "GET", "path": "/docs", "status_code": 200, "process_time": "0.96ms", "client": "127.0.0.1"}
+2025-07-25 13:52:40,894 - API - INFO - API Request: {"method": "GET", "path": "/openapi.json", "status_code": 200, "process_time": "13.90ms", "client": "127.0.0.1"}
+2025-07-25 13:52:49,477 - API - INFO - Starting session for bot 1
+2025-07-25 13:52:49,478 - API - ERROR - Failed to start session for bot 1: Failed to start session: Failed to start session: SSH connection error: [Errno 11001] getaddrinfo failed
+2025-07-25 13:52:49,480 - API - WARNING - Failed to log request body: Stream consumed
+2025-07-25 13:52:49,481 - API - ERROR - API Request: {"method": "POST", "path": "/api/startsession", "status_code": 500, "process_time": "8.38ms", "client": "127.0.0.1"}
+2025-07-25 15:05:32,848 - API - INFO - API Request: {"method": "GET", "path": "/docs", "status_code": 200, "process_time": "0.72ms", "client": "127.0.0.1"}
+2025-07-25 15:05:33,101 - API - INFO - API Request: {"method": "GET", "path": "/openapi.json", "status_code": 200, "process_time": "12.33ms", "client": "127.0.0.1"}
+2025-07-25 15:10:50,802 - API - INFO - API Request: {"method": "GET", "path": "/docs", "status_code": 200, "process_time": "0.65ms", "client": "127.0.0.1"}
+2025-07-25 15:10:50,937 - API - INFO - API Request: {"method": "GET", "path": "/openapi.json", "status_code": 200, "process_time": "0.29ms", "client": "127.0.0.1"}
+2025-07-25 15:11:07,146 - API - INFO - Starting session for bot 45
+2025-07-25 15:11:07,146 - SSH - INFO - Starting session for bot 45
+2025-07-25 15:11:08,166 - SSH - ERROR - Failed to start session for bot 45: [Errno 22] Invalid argument
+2025-07-25 15:11:08,167 - API - ERROR - Failed to start session for bot 45: Failed to start session: Failed to start session: [Errno 22] Invalid argument
+2025-07-25 15:11:08,168 - API - WARNING - Failed to log request body: Stream consumed
+2025-07-25 15:11:08,168 - API - ERROR - API Request: {"method": "POST", "path": "/api/startsession", "status_code": 500, "process_time": "1025.44ms", "client": "127.0.0.1"}
+2025-07-25 15:18:52,407 - API - INFO - Starting session for bot 45
+2025-07-25 15:18:52,408 - SSH - INFO - Starting session for bot 45
+2025-07-25 15:18:53,430 - SSH - ERROR - Failed to start session for bot 45: [Errno 22] Invalid argument
+2025-07-25 15:18:53,431 - API - ERROR - Failed to start session for bot 45: Failed to start session: Failed to start session: [Errno 22] Invalid argument
+2025-07-25 15:18:53,432 - API - WARNING - Failed to log request body: Stream consumed
+2025-07-25 15:18:53,432 - API - ERROR - API Request: {"method": "POST", "path": "/api/startsession", "status_code": 500, "process_time": "1028.52ms", "client": "127.0.0.1"}
+2025-07-25 15:19:06,184 - API - INFO - API Request: {"method": "GET", "path": "/docs", "status_code": 200, "process_time": "0.39ms", "client": "127.0.0.1"}
+2025-07-25 15:19:06,307 - API - INFO - API Request: {"method": "GET", "path": "/openapi.json", "status_code": 200, "process_time": "0.53ms", "client": "127.0.0.1"}
+2025-07-25 15:27:08,617 - API - INFO - API Request: {"method": "GET", "path": "/docs", "status_code": 200, "process_time": "0.39ms", "client": "127.0.0.1"}
+2025-07-25 15:27:08,935 - API - INFO - API Request: {"method": "GET", "path": "/openapi.json", "status_code": 200, "process_time": "1.00ms", "client": "127.0.0.1"}
+2025-07-25 15:27:20,801 - API - INFO - Starting session for bot 45
+2025-07-25 15:27:20,801 - SSH - INFO - Starting session for bot 45
+2025-07-25 15:27:21,815 - SSH - ERROR - Failed to start session for bot 45: [Errno 22] Invalid argument
+2025-07-25 15:27:21,816 - API - ERROR - Failed to start session for bot 45: Failed to start session: Failed to start session: [Errno 22] Invalid argument
+2025-07-25 15:27:21,817 - API - WARNING - Failed to log request body: Stream consumed
+2025-07-25 15:27:21,818 - API - ERROR - API Request: {"method": "POST", "path": "/api/startsession", "status_code": 500, "process_time": "1018.02ms", "client": "127.0.0.1"}
+2025-07-25 15:28:01,427 - API - INFO - Ending session for bot 45
+2025-07-25 15:28:01,428 - SSH - INFO - Ending session for bot 45
+2025-07-25 15:28:01,428 - API - INFO - Session ended for bot 45: {'Status': 'No active session'}
+2025-07-25 15:28:01,429 - API - WARNING - Failed to log request body: Stream consumed
+2025-07-25 15:28:01,429 - API - INFO - API Request: {"method": "POST", "path": "/api/endsession", "status_code": 200, "process_time": "4.06ms", "client": "127.0.0.1"}
+2025-07-25 15:31:24,839 - API - INFO - Starting session for bot 45
+2025-07-25 15:31:24,840 - SSH - INFO - Starting session for bot 45
+2025-07-25 15:31:25,853 - SSH - ERROR - Failed to start session for bot 45: [Errno 22] Invalid argument
+2025-07-25 15:31:25,854 - API - ERROR - Failed to start session for bot 45: Failed to start session: Failed to start session: [Errno 22] Invalid argument
+2025-07-25 15:31:25,855 - API - WARNING - Failed to log request body: Stream consumed
+2025-07-25 15:31:25,855 - API - ERROR - API Request: {"method": "POST", "path": "/api/startsession", "status_code": 500, "process_time": "1018.19ms", "client": "127.0.0.1"}
+2025-07-25 15:32:17,736 - API - INFO - API Request: {"method": "GET", "path": "/docs", "status_code": 200, "process_time": "0.51ms", "client": "127.0.0.1"}
+2025-07-25 15:32:17,906 - API - INFO - API Request: {"method": "GET", "path": "/openapi.json", "status_code": 200, "process_time": "0.69ms", "client": "127.0.0.1"}
+2025-07-25 15:37:02,711 - API - INFO - API Request: {"method": "GET", "path": "/docs", "status_code": 200, "process_time": "0.29ms", "client": "127.0.0.1"}
+2025-07-25 15:37:02,866 - API - INFO - API Request: {"method": "GET", "path": "/openapi.json", "status_code": 200, "process_time": "0.30ms", "client": "127.0.0.1"}
+2025-07-25 15:37:15,264 - API - INFO - Starting session for bot 45
