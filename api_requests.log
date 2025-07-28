@@ -53,3 +53,4 @@
 2025-07-25 15:37:02,711 - API - INFO - API Request: {"method": "GET", "path": "/docs", "status_code": 200, "process_time": "0.29ms", "client": "127.0.0.1"}
 2025-07-25 15:37:02,866 - API - INFO - API Request: {"method": "GET", "path": "/openapi.json", "status_code": 200, "process_time": "0.30ms", "client": "127.0.0.1"}
 2025-07-25 15:37:15,264 - API - INFO - Starting session for bot 45
+2025-07-28 14:03:33,403 - API - INFO - API Request: {"method": "GET", "path": "/docs", "status_code": 200, "process_time": "0.30ms", "client": "127.0.0.1"}
